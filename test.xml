@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APIResponse xmlns="this:is:the:namespace">
+    <Timestamp>2023-07-25T16:00:36.000Z</Timestamp>
+	<ItemArray>
+		<Item>
+			<ItemName>Magic Gum</ItemName>
+			<SKU>MGK-508</SKU>
+			<OptionsArray>
+				<Option1>Snozzberry Flavor</Option1>
+				<Option2>Everlasting Gobstopper Flavor</Option2>
+			</OptionsArray>
+		</Item>
+		<Item>
+			<ItemName>Triangular Yoyo</ItemName>
+			<SKU>YO-1337</SKU>
+			<OptionsArray>
+				<Option1>Glow In The Dark</Option1>
+				<Option2>80s Neon</Option2>
+			</OptionsArray>
+		</Item>
+	</ItemArray>
+    <Author>https://github.com/av1d/Python_XML_Tutorial/</Author>
+</APIResponse>
