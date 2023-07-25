@@ -37,6 +37,9 @@ It has two nested objects in the `<Item>` tag within the `<ItemArray>`. The `<Op
 
 Always format your XML before trying to break it down, it will be much easier. You can use an 'XML beautifier' online to do this, and you should validate it as well. Most sites do both.
 
+Here's an illustration:
+![XML level illustration](https://raw.githubusercontent.com/av1d/Python_XML_Tutorial/main/infographic.png)
+
 Let's quickly break down the structure of the above snippet (skip if you're familiar with XML structure):
 
 We have the XML declaration as the first line: `<?xml version="1.0"  encoding="UTF-8"?>`. 
@@ -49,8 +52,6 @@ element (`Timestamp`). The second element (`ItemAray`) is index 1.
 If there is a tag with child tags (example: <`Item><OptionsArray>`, whereas `OptionsArray` is the child of `Item`), the first item inside the parent tag starts at index 0. Formatting your XML before we start will make it easier to read,
 we can more easily find nested elements and determine the hierarchy of the XML file.
 
-Here's an illustration:
-![enter image description here](ok.com)
 
 If you're used to referencing things by index instead of key/tag I would recommend dropping the habit here to create readability unless you can guarantee that the XML will always retain exactly the same format forever no matter what. It is not uncommon for certain fields to only be returned by an API at certain times. Referencing them by tag can prevent reading and coding disasters and it's easier to break it down for readability. This isn't a failsafe because parsing the data by tag can still fail, but it will be much easier (especially if inside of a 'try' clause) to find the error, rather than crossreferencing index numbers to the XML data. 
 
