@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>                            <html>                                <head>                                    <meta charset="UTF-8">                                    <title>README</title>                                    <link rel="stylesheet" href="./style/style.css">                                    <link rel="stylesheet" href="./style/kimbie.dark.css">                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">                                    <style>*,body{margin:0;padding:0}.markdown-content,*{font-family:Vazir}*{box-sizing:border-box}html{font-size:14px}.markdown-content p,.rtl ol li,.rtl ul li{font-size:1.1rem}body{direction:rtl;color:#24292e}.ltr{direction:ltr!important}.rtl{direction:rtl!important}@media screen and (max-width:600px){body{padding:10px}}@media screen and (min-width:601px){body{padding:50px}}@font-face{font-family:Vazir;src:url(fonts/Vazir.woff)}@font-face{font-family:DejaVuSansMono;src:url(fonts/DejaVuSansMono.ttf)}.markdown-content{width:100%;outline-offset:-22px;padding:15px;line-height:3rem}code,code span,pre code span,ul li pre code{font-family:DejaVuSansMono,Menlo,'Liberation Mono',Consolas,'DejaVu Sans Mono','Ubuntu Mono','Courier New','andale mono','lucida console',monospace!important}.markdown-content p{text-align:justify;padding:.5rem}.markdown-content img{margin:0 auto;display:block;max-width:90%}.rtl ul li{margin-right:3rem!important}.rtl ol li{margin-right:3rem}.ltr ol li,.ltr ul li{font-size:1.1rem;margin-left:3rem}.markdown-content h1,.markdown-content h2,.markdown-content h3{padding:12px;text-shadow:none}.markdown-content h1{padding-top:60px;color:rgba(22,19,19,.8);font-weight:900;font-size:2.1rem}.markdown-content h2{font-weight:500;color:rgba(22,19,19,.6);font-size:1.8rem}.markdown-content h3{font-weight:300;color:rgba(22,19,19,.4);font-size:1.5rem}.markdown-content h4,.markdown-content h5{font-weight:200;color:rgba(22,19,19,.4)}.markdown-content h4{font-size:1.3rem}.markdown-content h5{font-size:1.2rem}@media screen and (min-width:48rem){#list{width:20%}#content{width:100%}}@media screen and (min-width:80rem){#list.none{display:inline-block}#content{width:80%}}@media print{#list{display:none}#content{display:block;width:100%;margin:0 auto}#content li,#content p{font-size:1rem}}.manual-anchor{top:45px}.markdown-container{max-width:1448px;margin:0 auto}.manual-link-icon{color:#8f8f8f}.manual-link-icon:hover{color:#000}code,ul li pre code{white-space:pre;word-wrap:normal;padding:3px 7px;color:#24292e;background-color:rgba(27,31,35,.05);border-radius:3px;font-size:1rem}.markdown-content ul li pre,.manual ul li pre,pre{margin:0;direction:ltr!important}.markdown-content ul li pre code,.manual ul li pre code,pre code{direction:ltr!important;line-height:1.45;padding:1em 0 .5em 3em;position:relative;display:block;overflow-x:auto;overflow-y:auto}a{text-decoration:none}.title{float:left;color:#ccc}.markdown-container{padding-top:60px}.elements{padding:12px;position:fixed;top:0;right:0;left:0;background-color:#444;height:50px;z-index:1}.input{color:#fff}#savebutton,input{font-size:15px}#savebutton{padding:0 7px!important}#rtl-checkbox-container{margin:3px 15px!important;color:#fff}.button{background-color:#fff;color:#444;font-size:1.6rem;display:inline-block;text-align:center;line-height:2.1rem;border-radius:2px}.button:hover{cursor:pointer;background-color:#eee}#refresh-button{width:2.2rem;vertical-align:middle}@media print{.no-print,.no-print *{display:none!important}}.hljs-comment,.hljs-quote{color:#99ac5b}.hljs-meta,.hljs-name,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-tag,.hljs-template-variable,.hljs-variable{color:#dc3958}.hljs-built_in,.hljs-builtin-name,.hljs-deletion,.hljs-link,.hljs-literal,.hljs-number,.hljs-params,.hljs-type{color:#f79a32}.hljs-attribute,.hljs-section,.hljs-title{color:#f06431}.hljs-addition,.hljs-bullet,.hljs-string,.hljs-symbol{color:#9c9}.hljs-function,.hljs-keyword,.hljs-selector-tag{color:#98676a}.hljs{display:block;overflow-x:auto;background:#221a0f;color:#d3af86}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}</style>                                </head>                                <body><div class="markdown-container ltr"><div class="markdown-content"><h1 id="python_xml_tutorial">Python_XML_Tutorial</h1>
+<p>A brief tutorial which demonstrates how to process any XML and get up and running quickly.</p>
+<p>Or...</p>
+<p><strong>How to Process any XML in Python in 10 minutes</strong></p>
+<p>I made this because I was tired of examples I can't understand
+or were overly specific. I am by no means an expert on XML but thought this may be useful to others. Without any BS I will try to break it down for you instantly and hopefully you will be running in no time. This should apply to virtually any XML file you encounter. This will also show you how to grab values from nested tags and tags with the same name under the same child, hopefully with ease. This is what I've found to be the easiest, most readable way. This document also takes into consideration common issues like lack of namespace, double namespaces, nested elements and so on.</p>
+<p>Let's go:</p>
+<p>We'll use this valid XML snippet throught as illustration.
+It has two nested objects in the <code>&lt;Item&gt;</code> tag within the <code>&lt;ItemArray&gt;</code>. The <code>&lt;OptionsArray&gt;</code> for each item has two objects with options for that item.</p>
+<pre><code class=" hljs "><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">APIResponse</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"this:is:the:namespace"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Timestamp</span>&gt;</span>2023-07-25T16:00:36.000Z<span class="hljs-tag">&lt;/<span class="hljs-name">Timestamp</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ItemArray</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Item</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ItemName</span>&gt;</span>Magic Gum<span class="hljs-tag">&lt;/<span class="hljs-name">ItemName</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">SKU</span>&gt;</span>MGK-508<span class="hljs-tag">&lt;/<span class="hljs-name">SKU</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">OptionsArray</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Option1</span>&gt;</span>Snozzberry Flavor<span class="hljs-tag">&lt;/<span class="hljs-name">Option1</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Option2</span>&gt;</span>Everlasting Gobstopper Flavor<span class="hljs-tag">&lt;/<span class="hljs-name">Option2</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">OptionsArray</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Item</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ItemName</span>&gt;</span>Triangular Yoyo<span class="hljs-tag">&lt;/<span class="hljs-name">ItemName</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">SKU</span>&gt;</span>YO-1337<span class="hljs-tag">&lt;/<span class="hljs-name">SKU</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">OptionsArray</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Option1</span>&gt;</span>Glow In The Dark<span class="hljs-tag">&lt;/<span class="hljs-name">Option1</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Option2</span>&gt;</span>80s Neon<span class="hljs-tag">&lt;/<span class="hljs-name">Option2</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">OptionsArray</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Item</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ItemArray</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">APIResponse</span>&gt;</span>
+</code></pre><p>Always format your XML before trying to break it down, it will be much easier. You can use an 'XML beautifier' online to do this, and you should validate it as well. Most sites do both.</p>
+<p>Here's an illustration:</p>
+<p><img src="https://raw.githubusercontent.com/av1d/Python_XML_Tutorial/main/infographic.png" alt="XML level illustration"></p>
+<p>Let's quickly break down the structure of the above snippet (skip if you're familiar with XML structure):</p>
+<p>We have the XML declaration as the first line: <code>&lt;?xml version="1.0"  encoding="UTF-8"?&gt;</code>. 
+We have a container as the second line which    contains a namespace: <code>&lt;APIResponse xmlns="this:is:the:namespace"&gt;</code>.</p>
+<p>I like to think of this as a container because it contains ALL of the other elements and itself doesn't have a value. Later on when we reference the namespae (if one exists) to read the document, we do not access this tag directly. Inside this container we have <code>Timestamp</code> and <code>ItemArray</code> elements.
+Inside the <code>ItemArray</code> we have additional elements.
+Look at the graphic and you can see the indexing numbers. You may notice the indexing starts at index 0 for the first
+element (<code>Timestamp</code>). The second element (<code>ItemAray</code>) is index 1. 
+If there is a tag with child tags (example: &lt;<code>Item&gt;&lt;OptionsArray&gt;</code>, whereas <code>OptionsArray</code> is the child of <code>Item</code>), the first item inside the parent tag starts at index 0. Formatting your XML before we start will make it easier to read,
+we can more easily find nested elements and determine the hierarchy of the XML file.</p>
+<p>If you're used to referencing things by index instead of key/tag I would recommend dropping the habit here to create readability unless you can guarantee that the XML will always retain exactly the same format forever no matter what. It is not uncommon for certain fields to only be returned by an API at certain times. Referencing them by tag can prevent reading and coding disasters and it's easier to break it down for readability. This isn't a failsafe because parsing the data by tag can still fail, but it will be much easier (especially if inside of a 'try' clause) to find the error, rather than crossreferencing index numbers to the XML data. </p>
+<p>While this makes the code a tiny bit longer it has better readability. Would you rather be able to decipher the code instantly or spend hours referencing which indexes apply to which tags? It's important to keep in mind that what makes sense now may not in the future when you look back at the code and this practice should help save time if in the future should you need to modify something. Of course, this is my personal opinion, so do as you may, but speaking from experience it is not fun to dissect a bunch of cryptic indexes especially when dealing with massive files with many fields!</p>
+<p>Let's say our parsed XML is inside the variable <code>XMLStructure</code>. We <em>could</em> access the first option of the first item (<code>ItemName</code>) like so: <code>XMLStructure[1][0][0].text</code>. This will give us "<strong>Magic Gum</strong>" as the value. Broken down, this translates to: <code>XMLStructure[ItemArray][Item 0][ItemName]</code>. To me it's rather confusing to refer to things by index numbers as we cannot see precisely what's going on here, it's basically a blob of text.</p>
+<p>As mentioned previously, I personally prefer writing it out the long way:</p>
+<pre><code class=" hljs ">ItemArray    = XMLStructure.findall('ItemArray')[0]  <span class="hljs-comment"># select the ItemArray</span>
+Item         = ItemArray.findall('Item')[0]          <span class="hljs-comment"># Select Item from ItemArray</span>
+ItemName     = Item.findall('ItemName')[0]           <span class="hljs-comment"># Select ItemName from Item</span>
+OptionsArray = Item.findall('OptionsArray')          <span class="hljs-comment"># Select OptionsArray from Item</span>
+
+print(ItemName.text, OptionsArray)
+</code></pre><p>If we look at the ElementTree manual:
+(<a href="https://docs.python.org/2/library/xml.etree.elementtree.html#finding-interesting-elements">https://docs.python.org/2/library/xml.etree.elementtree.html#finding-interesting-elements</a>) under <code>findall</code> we will see:</p>
+<blockquote>
+<p>"Element.findall() finds only elements with a tag which are direct
+children of the current element."</p>
+</blockquote>
+<p>So in the above pseudocode what we're doing is selecting each first element ([0]) then searching within that element for the next first element. Please read the above link to learn how to find other types.</p>
+<p>Placing [0] at the end will return the <em>first</em> tag within the previous tag. Omitting the index will return a list. The above example will print the name as a string and <em>all</em> of its options as a Python list. Don't worry, in the final example we'll print the options as strings. The expected output of the above is<code>: Magic Gum [&lt;Element '{this:is:the:namespace}Option1' at 0x7fe5d9634bd0&gt;, &lt;Element '{this:is:the:namespace}Option2' at 0x7fe5d9634c20&gt;]</code>
+So, as you can see, if you omit the [0] index, it will return a list of child elements.</p>
+<p>Example:</p>
+<pre><code class=" hljs "><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">APIResponse</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">test</span>&gt;</span>a<span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">test</span>&gt;</span>b<span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">APIResponse</span>&gt;</span>
+</code></pre><p><code>test = XMLStructure.findall('test')</code>  will return a list containing both <test> elements.
+<code>test = XMLStructure.findall('test')[0].text</code>  will return the text of the first element.
+<code>test = XMLStructure.findall('test')[1].text</code>  will return the text of the second element.</test></p>
+<p>Finally, here's a working example. First, save the larger XML code from the top of this document into a file '<strong>test.xml</strong>',
+save this script below in a file '<strong>test.py</strong>' and make sure they're in the same directory. Or, download them from this repository. They are the same.</p>
+<pre><code class=" hljs "><span class="hljs-keyword">import</span> xml.etree.ElementTree <span class="hljs-keyword">as</span> ET
+
+tree = ET.parse(<span class="hljs-string">'test.xml'</span>)
+root = tree.getroot()
+
+rootKey = <span class="hljs-string">'.//{this:is:the:namespace}'</span>  <span class="hljs-comment"># Specify namespace as it is in 'xmlns' attribute of &lt;xml&gt; tag</span>
+
+Timestamp    = root.findall(rootKey + <span class="hljs-string">'Timestamp'</span>)[<span class="hljs-number">0</span>]  <span class="hljs-comment"># Find the timestamp</span>
+ItemArray    = root.findall(rootKey + <span class="hljs-string">'ItemArray'</span>)[<span class="hljs-number">0</span>]  <span class="hljs-comment"># Select the 'ItemArray'</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(ItemArray)):  <span class="hljs-comment"># iterate through ItemArray to find each Item.</span>
+
+    <span class="hljs-comment"># the comment indentation below indicates the XML tree structure.</span>
+
+    Item         = ItemArray.findall(    rootKey + <span class="hljs-string">'Item'</span>)[i]           <span class="hljs-comment"># find 'Item' inside 'ItemArray'</span>
+    ItemName     = Item.findall(         rootKey + <span class="hljs-string">'ItemName'</span>)[<span class="hljs-number">0</span>]           <span class="hljs-comment"># find 'ItemName' inside 'Item'</span>
+    SKU          = Item.findall(         rootKey + <span class="hljs-string">'SKU'</span>)[<span class="hljs-number">0</span>]                <span class="hljs-comment"># find 'SKU' inside 'Item'</span>
+    OptionsArray = Item.findall(         rootKey + <span class="hljs-string">'OptionsArray'</span>)[<span class="hljs-number">0</span>]       <span class="hljs-comment"># Select the 'OptionsArray' inside 'Item'</span>
+    Option1      = OptionsArray.findall( rootKey + <span class="hljs-string">'Option1'</span>)[<span class="hljs-number">0</span>]                <span class="hljs-comment"># Find 'Option1' inside OptionsArray'</span>
+    Option2      = OptionsArray.findall( rootKey + <span class="hljs-string">'Option2'</span>)[<span class="hljs-number">0</span>]                <span class="hljs-comment"># Find 'Option2' inside OptionsArray'</span>
+
+    print(
+            <span class="hljs-string">'\n'</span>,
+            <span class="hljs-string">'Timestamp:'</span>, Timestamp.text, <span class="hljs-string">'\n'</span>,
+            <span class="hljs-string">'Item Name:'</span>, ItemName.text,  <span class="hljs-string">'\n'</span>,
+            <span class="hljs-string">'      SKU:'</span>, SKU.text,       <span class="hljs-string">'\n'</span>,
+            <span class="hljs-string">'  Options:'</span>, Option1.text,   <span class="hljs-string">','</span> , Option2.text,
+            <span class="hljs-string">'\n'</span>,
+    )
+
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">#   Timestamp: 2023-07-25T16:00:36.000Z </span>
+<span class="hljs-comment">#   Item Name: Magic Gum </span>
+<span class="hljs-comment">#         SKU: MGK-508 </span>
+<span class="hljs-comment">#     Options: Snozzberry Flavor , Everlasting Gobstopper Flavor</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">#   Timestamp: 2023-07-25T16:00:36.000Z </span>
+<span class="hljs-comment">#   Item Name: Triangular Yoyo </span>
+<span class="hljs-comment">#         SKU: YO-1337 </span>
+<span class="hljs-comment">#     Options: Glow In The Dark , 80s Neon </span>
+</code></pre><p><strong>Some notes:</strong> if there is no namespace specified in the <code>&lt;XML&gt;</code> tag at the begining of the XML document
+simply just remove the namespace portion from the code or make <code>rootKey = ''</code>. If there are multiple namespaces, adapt the code accordingly.</p>
+<p>Example:</p>
+<p>rootKey1 = './/{this:is:the:namespace1}'
+rootKey2 = './/{this:is:the:namespace2}'</p>
+<p>There you have it, this is what works best for me and what I find to be the easiest. Hopefully you have found something of value here.</p>
+<p>This tutorial was obtained from: <a href="https://github.com/av1d/Python_XML_Tutorial/">https://github.com/av1d/Python_XML_Tutorial/</a></p>
+</div></div></body>                            </html>
