@@ -48,7 +48,7 @@ Let's quickly break down the structure of the above snippet (skip if you're fami
 We have the XML declaration as the first line: `<?xml version="1.0"  encoding="UTF-8"?>`. 
 We have a container as the second line which    contains a namespace: `<APIResponse xmlns="this:is:the:namespace">`.
 
-I like to think of this as a container because it contains ALL of the other elements and itself doesn't have a value. Later on when we reference the namespae (if one exists) to read the document, we do not access this tag directly. Inside this container we have `Timestamp` and `ItemArray` elements.
+I like to think of this as a container because it contains ALL of the other elements and itself doesn't have a value. Later on when we reference the namespace (if one exists) to read the document, we do not access this tag directly. Inside this container we have `Timestamp` and `ItemArray` elements.
 Inside the `ItemArray` we have additional elements.
 Look at the graphic and you can see the indexing numbers. You may notice the indexing starts at index 0 for the first
 element (`Timestamp`). The second element (`ItemAray`) is index 1. 
