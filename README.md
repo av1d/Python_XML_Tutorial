@@ -38,6 +38,7 @@ It has two nested objects in the `<Item>` tag within the `<ItemArray>`. The `<Op
 Always format your XML before trying to break it down, it will be much easier. You can use an 'XML beautifier' online to do this, and you should validate it as well. Most sites do both.
 
 Here's an illustration:
+
 ![XML level illustration](https://raw.githubusercontent.com/av1d/Python_XML_Tutorial/main/infographic.png)
 
 Let's quickly break down the structure of the above snippet (skip if you're familiar with XML structure):
