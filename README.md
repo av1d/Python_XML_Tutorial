@@ -151,8 +151,8 @@ simply just remove the namespace portion from the code or make `rootKey = ''`. I
 
 Example:
 
-rootKey1 = './/{this:is:the:namespace1}'
-rootKey2 = './/{this:is:the:namespace2}'
+    rootKey1 = './/{this:is:the:namespace1}'
+    rootKey2 = './/{this:is:the:namespace2}'
 
 
 There you have it, this is what works best for me and what I find to be the easiest. Hopefully you have found something of value here.
