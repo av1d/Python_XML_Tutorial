@@ -80,7 +80,7 @@ If we look at the ElementTree manual:
 
 So in the above pseudocode what we're doing is selecting each first element ([0]) then searching within that element for the next first element. Please read the above link to learn how to find other types.
 
-Placing [0] at the end will return the _first_ tag within the previous tag. Omitting the index will return a list. The above example will print the name as a string and _all_ of its options as a Python list. Don't worry, in the final example we'll print the options as strings. The expected output of the above is`: Magic Gum [<Element '{this:is:the:namespace}Option1' at 0x7fe5d9634bd0>, <Element '{this:is:the:namespace}Option2' at 0x7fe5d9634c20>]`
+Placing [0] at the end will return the _first_ tag within the previous tag. Omitting the index will return a list. The above example will print the name as a string and _all_ of its options as a Python list. Don't worry, in the final example we'll print the options as strings. The expected output of the above is: `Magic Gum [<Element '{this:is:the:namespace}Option1' at 0x7fe5d9634bd0>, <Element '{this:is:the:namespace}Option2' at 0x7fe5d9634c20>]`
 So, as you can see, if you omit the [0] index, it will return a list of child elements.
 
 Example:
